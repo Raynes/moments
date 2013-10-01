@@ -1,4 +1,4 @@
-(defproject me.raynes/moments "0.1.0"
+(defproject me.raynes/moments "0.1.1"
   :description "A library for scheduling jobs (kinda like cron)."
   :url "https://github.com/Raynes/moments"
   :license {:name "Eclipse Public License"

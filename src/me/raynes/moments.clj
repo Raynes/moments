@@ -23,22 +23,33 @@
     :else
     (ScheduledThreadPoolExecutor. pool-size)))
 
-(defn ^:private sequential-scheduler
+(defn ^:private chronicle-scheduler
   "A self-sustaining scheduler function."
   [executor f times]
   (let [[start & rest] times]
     (fn []
       (.schedule executor
-                 (sequential-scheduler executor f rest)
+                 (chronicle-scheduler executor f rest)
                  (offset start)
                  ms)
       (f))))
+
+(defn schedule-every
+  "Schedule a task to run every n milliseconds starting n
+   milliseconds from now. If init-delay is passed, the first
+   run of the task will be delayed for that many milliseconds."
+  ([executor n f]
+   (schedule-every executor n 0 f))
+  ([executor n init-delay f]
+   (.scheduleWithFixedDelay executor f init-delay n ms)))
+
+(defn schedule-at
+  "Schedule a task to run at a specific time exactly once."
+  [executor date f]
+  (.schedule executor f (offset date) ms))
 
 (defn schedule
   "Schedule a task to run based on a Chronicle specification."
   [executor spec f]
   (let [[start & rest] (c/times-for spec (t/now))]
-    (.schedule executor
-               (sequential-scheduler executor f rest)
-               (offset start)
-               ms)))
+    (schedule-at executor start (chronicle-scheduler executor f rest))))
