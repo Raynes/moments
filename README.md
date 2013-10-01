@@ -51,6 +51,8 @@ This one is even simpler. It just schedules a task to happen at a specific date
 and time.
 
 ```clojure
+user=> (require '[clj-time.core :as t])
+nil
 user=> (m/schedule-at executor (t/plus (t/now) (t/seconds 5)) #(println "Triggered!"))
 #<ScheduledFutureTask java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask@32d8c8a9>
 ```
