@@ -4,10 +4,6 @@ Moments is a simple task scheduling library (cronish) that uses
 [chronicle](https://github.com/flatland/chronicle) and Java executors under the
 hood.
 
-Note that this library is designed for things that are meant to be run at
-specific times, days, etc, and works at minute (not millisecond) granularity.
-You cannot, for example, schedule something to run every 3 seconds.
-
 ## Usage
 
 Moments has several different functions for doing scheduling-related things.
