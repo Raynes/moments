@@ -17,6 +17,8 @@ they create an executor. The rest of this section will assume you've done the
 following:
 
 ```clojure
+user=> (require '[me.raynes.moments :as m])
+nil
 user=> (def executor (m/executor 10))
 #'user/executor
 ```
@@ -32,8 +34,6 @@ jobs, but represented as Clojure maps. Here is an example usage. I'd like for
 my REPL to say `"Hi!"` to me every 5 minutes. Let's make that happen.
 
 ```clojure
-user=> (require '[me.raynes.moments :as m])
-nil
 user=> (m/schedule executor {:minute (range 0 60 5)} #(println "Hi!"))
 #<ScheduledFutureTask java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask@23975e4d>
 ```
