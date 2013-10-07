@@ -6,6 +6,8 @@ hood.
 
 ## Usage
 
+![version](https://clojars.org/me.raynes/moments/latest-version.svg)
+
 Moments has several different functions for doing scheduling-related things.
 Let's look at them individually.
 
