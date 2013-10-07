@@ -6,7 +6,7 @@ hood.
 
 ## Usage
 
-![version](https://clojars.org/me.raynes/moments/latest-version.svg)
+[![version](https://clojars.org/me.raynes/moments/latest-version.svg)](https://clojars.org/me.raynes/moments)
 
 Moments has several different functions for doing scheduling-related things.
 Let's look at them individually.
