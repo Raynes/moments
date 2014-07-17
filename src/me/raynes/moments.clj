@@ -1,6 +1,7 @@
 (ns me.raynes.moments
   (:require [flatland.chronicle :as c]
-            [clj-time.core :as t])
+            [clj-time.core :as t]
+            [clj-time.local :as l])
   (:import (java.util.concurrent Executors ScheduledThreadPoolExecutor TimeUnit)))
 
 (def ^:private ms TimeUnit/MILLISECONDS)
@@ -8,7 +9,7 @@
 (defn ^:private offset
   "Get the time in milliseconds between now and t."
   [t]
-  (-> (t/now) (t/interval t) (t/in-millis)))
+  (-> (l/local-now) (t/interval t) (t/in-millis)))
 
 (defn executor
   "Create a ScheduledThreadPoolExecutor (lol) object
@@ -51,5 +52,5 @@
 (defn schedule
   "Schedule a task to run based on a Chronicle specification."
   [executor spec f]
-  (let [[start & rest] (c/times-for spec (t/now))]
+  (let [[start & rest] (c/times-for spec (l/local-now))]
     (schedule-at executor start (chronicle-scheduler executor f rest))))
